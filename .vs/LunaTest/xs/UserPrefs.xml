@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{3BA52155-0720-2BE0-3D81-04E4C1E74EAD}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/Export.cs">
+    <Files>
+      <File FileName="Assets/Editor/Export.cs" Line="17" Column="35" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LunaTest" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Editor" expanded="True">
+                <Node name="Export.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="02bef2f1-bb4a-4f37-b47f-df3f4c096328" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
