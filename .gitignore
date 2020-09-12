@@ -1,0 +1,36 @@
+$PROJDIR
+
+obj
+Temp
+Library
+Build
+.suo
+.user
+.pidb
+.userprefs
+
+$PROJDIR/Library
+
+cache
+previews
+ScriptAssemblies
+assetDatabase3
+AssetImportState
+assetservercachev3
+AssetServerCacheV3
+AssetVersioning.db
+AudioManager.asset
+BuildPlayer.prefs
+BuildSettings.asset
+DynamicsManager.asset
+EditorUserBuildSettings.asset
+expandedItems
+FailedAssetImports.txt
+guidmapper
+InspectorExpandedItems.asset
+MonoManager.asset
+NetworkManager.asset
+ScriptMapper
+unity default resources
+unity editor resources
+Assembly-CSharp*
