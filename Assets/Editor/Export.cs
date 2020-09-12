@@ -6,16 +6,11 @@ using System.IO;
 
 public class Export : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     [MenuItem("Export to HTML5/Export")]
     public static void ExportToHTML()
     {
         string path = Application.dataPath + "/../Export/index.html";
+        
         string fileText = "";
         //Start of file
         fileText += "<html><head> <title>Sam Eller Test</title> <script src='https://code.playcanvas.com/playcanvas-stable.min.js'></script></head><body> <canvas id='application'></canvas> <script>const canvas=document.getElementById('application'); const app=new pc.Application(canvas); app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW); app.setCanvasResolution(pc.RESOLUTION_AUTO); const light=new pc.Entity('light'); light.addComponent('light'); app.root.addChild(light); light.setEulerAngles(45, 135, 0);";
@@ -26,20 +21,21 @@ public class Export : MonoBehaviour
         //Camera position
         Vector3 pos = Camera.main.transform.position;
         fileText += "camera.setPosition("+ (pos.x) + "," + (pos.y)+ "," + pos.z +");";
-        //Camera rotation needs y rotation 180... not sure what Playcanvas settings invert this
+
+        //Camera rotation needs y rotation 180... not sure why Playcanvas settings invert this... everything is mirrored Horizontally
         Vector3 rot = Camera.main.transform.eulerAngles;
-        fileText += "camera.setEulerAngles(" +rot.x + ","+ rot.y +180 + ","+(rot.z)+");";
+        double flippedY = rot.y + 180;
+        fileText += "camera.setEulerAngles(" +rot.x + ","+ flippedY + ","+rot.z+");";
 
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
 
-        //Keyvalue pair List to preserve hierarchy
-        List<KeyValuePair<GameObject, int>> orderedList = new List<KeyValuePair<GameObject, int>>();
+        //do objects with no parents first
         foreach (GameObject go in allObjects)
         {
             //Cubes are GameObjects with tag Untagged
             if (go.tag == "Untagged")
             {
-                //only GameObjects with no parents are instantiated first, and in list with value 0
+                //only GameObjects with no parents are instantiated first
                 if (!go.transform.parent)
                 {
                     string root = "app.root";
@@ -53,6 +49,9 @@ public class Export : MonoBehaviour
                 }
             }
         }
+
+        //Keyvalue pair List to preserve hierarchy
+        List<KeyValuePair<GameObject, int>> orderedList = new List<KeyValuePair<GameObject, int>>();
         foreach (GameObject go in allObjects)
         {
             if (go.tag == "Untagged")
@@ -83,13 +82,24 @@ public class Export : MonoBehaviour
 
         }
 
-        //Final stuff
+        //Final HTML tags and Playcanvas start
         fileText += " app.start(); </script></body></html>";
 
-        File.WriteAllText(path, fileText);
+        //See if Export folder exists
+        try
+        {
+            File.WriteAllText(path, fileText);
+        }
+        catch
+        {
+            var folder = Directory.CreateDirectory(Application.dataPath + "/../Export");
+
+            File.WriteAllText(path, fileText);
+        }
         Debug.Log("Exporting... "+ path);
     }
 
+    //Recursively get Parent count for orderedList
     static int GetParentCount(GameObject go)
     {
         GameObject subject = go;
