@@ -24,7 +24,7 @@ public class Export : MonoBehaviour
 
         //Camera rotation needs y rotation 180... not sure why Playcanvas settings invert this... everything is mirrored Horizontally
         Vector3 rot = Camera.main.transform.eulerAngles;
-        double flippedY = rot.y + 180;
+        double flippedY = -1*rot.y + 180;
         fileText += "camera.setEulerAngles(" +rot.x + ","+ flippedY + ","+rot.z+");";
 
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
